@@ -1,0 +1,4 @@
+discord.py==2.3.2
+openai==1.16.2
+python-dotenv==0.14.0
+requests==2.31.0
