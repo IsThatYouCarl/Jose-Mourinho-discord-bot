@@ -11,7 +11,7 @@ It has expanded to include features such as:
 To implement this in your own discord bot, you need to acquire your bot token and football API token from this website https://www.football-data.org/
 Then create a .env file, store the discord bot token and football API key in the following format:
 
-BOT_TOKEN = "your bot token"\n 
+BOT_TOKEN = "your bot token" <br />
 FOOTBALL_API_KEY = "your personal api key"
 
 Then run jose.py and voila
