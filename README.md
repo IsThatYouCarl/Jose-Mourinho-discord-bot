@@ -7,6 +7,8 @@ It has expanded to include features such as:
 1. Retrieving league table rankings for the top 5 European Leagues.
 2. Gathering top scorer statistics for each league.
 3. Providing information on upcoming matches for a specific team or within a competition/league (though somewhat limited by API key access restrictions).
+4. A remind_match function that allows the bot to automatically set a reminder for the closeset match in the upcoming matches (/remind_match).
+5. Different reminder functions that allows you to set a reminder at a certain time (/remind_at), in a certain period of time (/remind_in) and every certain period of time (/remind_every).  
 
 To implement this in your own discord bot, you need to acquire your bot token and football API token from this website https://www.football-data.org/
 Then create a .env file, store the discord bot token and football API key in the following format:
