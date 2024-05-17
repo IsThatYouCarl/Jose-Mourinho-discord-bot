@@ -85,7 +85,7 @@ def get_table (url_code, season):
             stripped_league = last_part.rstrip(".csv")
       
             str_re = '```\nLEAGUE: ' + str(stripped_league) +\
-                 ' ' * (6) +'MATCHDAY: ' + '38' + 'SEASON:' + f'int{season} - {int(season)+1}'  + '\n'
+                 ' ' * (2) +'MATCHDAY: ' + '38' + ''*(2)+ 'SEASON:' + f'{int(season)} - {int(season)+1}'  + '\n'
             str_re += '╔════╤════════════════════════════╤════╤════╤════╤════╤═══════╤═════╗\n'
             str_re += '║ SN │            TEAM            │ M  │ W  │ D  │ L  │  PTS  │ GD  ║\n'
             str_re += '╠════╪════════════════════════════╪════╪════╪════╪════╪═══════╪═════╣\n'
@@ -97,7 +97,7 @@ def get_table (url_code, season):
 
                 str_re += text
 
-            str_re += '╚════╧════════════════════════════╧════╧════╧════╧════╧═════╧═════╝```'
+            str_re += '╚════╧════════════════════════════╧════╧════╧════╧════╧═══════╧═════╝```'
         
             return str_re
              
@@ -133,38 +133,67 @@ def get_top_scorer(url_code, season):
             str_re += text
 
         str_re += '╚════╧══════════════════════════╧══════════════════════════╧════╧════╧════╝```'
-        
+              
     else:
         return "Invalid code"
     return str_re
 
-def get_upcoming_matches(input_team, team_code, competition_id):
-    if team_code in team_id.values():    
-        if competition_id == None:
-            url = f"http://api.football-data.org/v4/teams/{int(team_code)}/matches?status=SCHEDULED"
 
-        else:
-            url = f"http://api.football-data.org/v4/teams/{int(team_code)}/matches?status=SCHEDULED&competitions={competition_id}"
+def get_upcoming_matches_for_team(input_team, team_code):
+    if team_code in team_id.values():    
+        url = f"http://api.football-data.org/v4/teams/{int(team_code)}/matches?status=SCHEDULED"
 
         conn = requests.get(url, headers = headers)
         data = conn.json()
 
         match_data = data.get("matches")
         
-        str_re = '```\nTEAM: ' + input_team + '\n'
-        str_re += '╔══════════════════════════╤══════════════════════════╤══════════════════════════╤══════════════════════╗\n'
-        str_re += '║        COMPETITION       │          HOMETEAM        │          AWAYTEAM        │         TIME         ║\n'
-        str_re += '╠══════════════════════════╪══════════════════════════╪══════════════════════════╪══════════════════════╣\n'
+        str_re = '```\nTEAM: ' + str(input_team) +'\n'
+        str_re += '═════════════════════════════\n'
 
         for i, match in enumerate(match_data):
-            text ='║ %-24s │ %-24s │ %-24s │ %20s ║\n'\
-                % (match["competition"]["name"], match["homeTeam"]["shortName"], match["awayTeam"]["shortName"], convert_time(match["utcDate"]))
+            text_1 = '%-40s\n'\
+                %(match["competition"]["name"] + "   " + convert_time(match["utcDate"]))
+            text_2 = '%-40s\n'\
+                %(match["awayTeam"]["shortName"] +' vs '+ match["homeTeam"]["shortName"])
 
-            str_re += text
+            str_re += text_1
+            str_re += text_2
+            str_re += '═════════════════════════════\n'
+            
+        str_re += '```'
 
-        str_re += '╚══════════════════════════╧══════════════════════════╧══════════════════════════╧══════════════════════╝```'
     else:
         return "Invalid code"
     
     return str_re
+
+
+def get_upcoming_matches_for_competition(input_competition, competition_id):
+    if competition_id in league_code.values():    
+        url = f"http://api.football-data.org/v4/matches?competitions={competition_id}&status=SCHEDULED"
+
+        conn = requests.get(url, headers = headers)
+        data = conn.json()
+        match_data = data.get("matches")
+        
+        str_re = '```\nCOMPETITION: ' + str(input_competition) +'\n'
+        str_re += '═════════════════════════════\n'
+
+        for i, match in enumerate(match_data):
+            text_1 = '%-40s\n'\
+                %(match["competition"]["name"] + "   " + convert_time(match["utcDate"]))
+            text_2 = '%-40s\n'\
+                %(match["awayTeam"]["shortName"] +' vs '+ match["homeTeam"]["shortName"])
+
+            str_re += text_1
+            str_re += text_2
+            str_re += '═════════════════════════════\n'
+
+        str_re += '```'
+    else:
+        return "Invalid code"
+    
+    return str_re
+
 
