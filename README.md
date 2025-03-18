@@ -2,7 +2,7 @@ This project involves creating a Discord bot named "Jose Mourinho" with football
 
 <img src="https://github.com/IsThatYouCarl/Jose-Mourinho-discord-bot/assets/90243903/47989d64-7c7b-4bd2-93a0-7b87e0a0d0f9.png" width=50% height=50%>
 
-The project was initially inspired by the idea of a Jose Mourinho chatbot responding to specific messages with relevant gifs on my Discord server, so I can spam certain gifs at my friend when I dominate him in efootball 2024. 
+The project was initially inspired by the idea of a Jose Mourinho chatbot responding to specific messages with relevant gifs on my Discord server.
 
 It has expanded to include features such as:
 
