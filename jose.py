@@ -232,7 +232,7 @@ def run():
             while loop_bool is True:      
                 current_time =  time.strftime("%Y-%m-%d %H:%M:%S")
                 if current_time >= time_12hr:
-                    await channel.send(f'Hey nigga, it is time for {reason}')
+                    await channel.send(f'Hey, it is time for {reason}')
                     break        
                 else:  
                     await asyncio.sleep(1)
@@ -247,7 +247,7 @@ def run():
                 current_time_string = time.strftime("%H:%M:%S")
                 current_time = datetime.strptime(current_time_string, '%H:%M:%S')  
                 if current_time >= target_time:
-                    await channel.send(f'Hey nigga, it is time for {reason}')
+                    await channel.send(f'Hey, it is time for {reason}')
                     break
                 else:
                     await asyncio.sleep(1)
@@ -270,7 +270,7 @@ def run():
                 current_time_string = time.strftime("%H:%M:%S")
                 current_time = datetime.strptime(current_time_string, '%H:%M:%S')      
                 if current_time >= target_time:
-                    await channel.send(f'Hey nigga, it is time for {reason}')
+                    await channel.send(f'Hey, it is time for {reason}')
                     break
                 else:        
                     await asyncio.sleep(1)
